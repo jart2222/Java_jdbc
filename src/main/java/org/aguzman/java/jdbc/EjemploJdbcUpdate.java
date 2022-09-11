@@ -5,10 +5,11 @@ import org.aguzman.java.jdbc.repositorio.ProductoRepositorioImpl;
 import org.aguzman.java.jdbc.repositorio.Repositorio;
 import org.aguzman.java.jdbc.util.ConexionBaseDatos;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 
-public class EjemploJdbc {
+public class EjemploJdbcUpdate {
     public static void main(String[] args) {
         try ( Connection conn= ConexionBaseDatos.getInstance()){
             Repositorio<Producto> repositorio=new ProductoRepositorioImpl();
@@ -16,13 +17,13 @@ public class EjemploJdbc {
             repositorio.listar().forEach(System.out::println);
             System.out.println("============ obtener por id ============");
             System.out.println(repositorio.porId(1L));
-            System.out.println("============ Insertar nuevo producto ============");
+            System.out.println("============ editar nuevo producto ============");
             Producto producto=new Producto();
-            producto.setNombre("Teclado mecanico");
-            producto.setPrecio(500);
-            producto.setFechaRegistro(new Date());
+            producto.setId(3L);
+            producto.setNombre("Teclado Razer mecanico");
+            producto.setPrecio(700);
             repositorio.guardar(producto);
-            System.out.println("Producto guardado con exito");
+            System.out.println("Producto editado con exito");
             repositorio.listar().forEach(System.out::println);
 
         } catch (SQLException e) {
