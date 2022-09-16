@@ -1,11 +1,13 @@
 package org.aguzman.java.jdbc;
 
+import org.aguzman.java.jdbc.modelo.Categoria;
 import org.aguzman.java.jdbc.modelo.Producto;
 import org.aguzman.java.jdbc.repositorio.ProductoRepositorioImpl;
 import org.aguzman.java.jdbc.repositorio.Repositorio;
 import org.aguzman.java.jdbc.util.ConexionBaseDatos;
 
 import java.sql.*;
+import java.util.Calendar;
 import java.util.Date;
 
 public class EjemploJdbc {
@@ -18,9 +20,12 @@ public class EjemploJdbc {
             System.out.println(repositorio.porId(1L));
             System.out.println("============ Insertar nuevo producto ============");
             Producto producto=new Producto();
-            producto.setNombre("Teclado mecanico");
-            producto.setPrecio(500);
+            producto.setNombre("Teclado Razer mecanico");
+            producto.setPrecio(550);
             producto.setFechaRegistro(new Date());
+            Categoria categoria=new Categoria();
+            categoria.setId(3L);
+            producto.setCategoria(categoria);
             repositorio.guardar(producto);
             System.out.println("Producto guardado con exito");
             repositorio.listar().forEach(System.out::println);
